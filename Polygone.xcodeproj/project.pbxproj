@@ -15,6 +15,7 @@
 		EA9706031AC03F2800805E72 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA9706021AC03F2800805E72 /* Images.xcassets */; };
 		EA9706061AC03F2800805E72 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9706041AC03F2800805E72 /* LaunchScreen.xib */; };
 		EA9706121AC03F2800805E72 /* PolygoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9706111AC03F2800805E72 /* PolygoneTests.swift */; };
+		EA97061C1AC051FA00805E72 /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97061B1AC051FA00805E72 /* Ship.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		EA97060B1AC03F2800805E72 /* PolygoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolygoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9706101AC03F2800805E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA9706111AC03F2800805E72 /* PolygoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygoneTests.swift; sourceTree = "<group>"; };
+		EA97061B1AC051FA00805E72 /* Ship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				EA9705F71AC03F2800805E72 /* AppDelegate.swift */,
 				EA9705F91AC03F2800805E72 /* GameScene.sks */,
+				EA97061B1AC051FA00805E72 /* Ship.swift */,
 				EA9705FB1AC03F2800805E72 /* GameScene.swift */,
 				EA9705FD1AC03F2800805E72 /* GameViewController.swift */,
 				EA9705FF1AC03F2800805E72 /* Main.storyboard */,
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA9705FC1AC03F2800805E72 /* GameScene.swift in Sources */,
+				EA97061C1AC051FA00805E72 /* Ship.swift in Sources */,
 				EA9705FE1AC03F2800805E72 /* GameViewController.swift in Sources */,
 				EA9705F81AC03F2800805E72 /* AppDelegate.swift in Sources */,
 			);

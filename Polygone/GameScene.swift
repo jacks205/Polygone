@@ -8,35 +8,44 @@
 
 import SpriteKit
 
+
 class GameScene: SKScene {
+    var contentCreated : Bool = false
+    var ship : Ship?
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
-        self.addChild(myLabel)
+        if(!self.contentCreated){
+            self.createSceneContents()
+            self.contentCreated = true
+        }
     }
+    
+    func createSceneContents(){
+        self.backgroundColor = SKColor.whiteColor()
+        createShip()
+        
+    }
+    
+    func createShip(){
+        let width : Double = 35
+        let height : Double = 35
+        let percentShipY : CGFloat = 0.1
+        self.ship = Ship(width: width, height: height, lineWidth: 5)
+        self.ship!.setPosition(CGPointMake(CGRectGetMidX(self.frame) - CGFloat(width/2), self.frame.height * percentShipY))
+        self.addChild(self.ship!.body!)
+        let bullet : Bullet = Bullet(length: 15, thickness: 3)
+        bullet.body?.position = self.ship!.nose!
+        self.addChild(bullet.body!)
+    }
+    
+    
+    
+
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
     }
    
     override func update(currentTime: CFTimeInterval) {
