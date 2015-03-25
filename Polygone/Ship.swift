@@ -54,12 +54,12 @@ class Ship {
     func moveShip(xMovement : Double, boundRight : CGFloat){
         let offset = xMovement * self.movementSpeed
         let point : CGPoint = CGPointMake(self.body!.position.x + CGFloat(offset), self.body!.position.y)
+//        print("\(point)")
         let x = point.x
-//        print("\(x), \(0 + self.width/2) || \(x), \(boundRight - self.width/2)")
         if(x < 0 || x > boundRight - self.width){
             return;
         }
-        self.body?.position = point
+        self.body!.position = point
         self.updateNose(point)
     }
     
@@ -78,9 +78,12 @@ struct Bullet {
     func createBullet(rect : CGRect) -> SKShapeNode{
         var bullet = SKShapeNode(rect: rect)
         bullet.antialiased = true
-        bullet.strokeColor = UIColor.blackColor()
+        bullet.strokeColor = SKColor.blackColor()
         bullet.physicsBody = SKPhysicsBody(rectangleOfSize: rect.size)
-        bullet.physicsBody?.dynamic = false
+        bullet.physicsBody!.dynamic = true
+        bullet.physicsBody!.affectedByGravity = false
+        bullet.physicsBody!.categoryBitMask = Bullet.bulletCategory
+        bullet.physicsBody!.contactTestBitMask = GameSceneConst.sceneCategory
         return bullet
     }
 }
@@ -90,7 +93,7 @@ struct Box{
     
     var body : SKShapeNode?
     
-    init(rect : CGRect, color : UIColor){
+    init(rect : CGRect, color : SKColor){
         self.body = SKShapeNode(rect: rect)
         self.body?.fillColor = color
     }

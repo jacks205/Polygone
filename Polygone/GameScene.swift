@@ -9,10 +9,12 @@
 import SpriteKit
 import CoreMotion
 
+struct GameSceneConst{
+    static let sceneCategory : UInt32 = 0x01 << 3
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    let sceneCategory : UInt32 = 0x01 << 3
-    
+
     var contentCreated : Bool = false
     var ship : Ship?
     
@@ -20,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
+        println(size)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -29,25 +32,57 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         if(!self.contentCreated){
-            self.createSceneContents()
+            self.createSceneContents(view)
             self.contentCreated = true
         }
     }
     
-    func createSceneContents(){
+    func createSceneContents(view : SKView){
+        self.size = view.bounds.size
         self.backgroundColor = SKColor.whiteColor()
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        self.physicsBody?.dynamic = false
-        self.physicsBody?.categoryBitMask = self.sceneCategory
-        self.physicsBody?.contactTestBitMask = Bullet.bulletCategory
+        self.physicsWorld.contactDelegate = self
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.view!.frame)
+        self.physicsBody!.dynamic = true
+        self.physicsBody!.categoryBitMask = GameSceneConst.sceneCategory
+//        self.physicsBody!.contactTestBitMask = Bullet.bulletCategory
+        
+//        var topBarrier : SKShapeNode = SKShapeNode(rect: CGRectMake(0, self.frame.height, self.frame.width, 1))
+//        topBarrier.physicsBody = SKPhysicsBody(rectangleOfSize: topBarrier.frame.size)
+//        topBarrier.physicsBody!.dynamic = true
+//        topBarrier.physicsBody!.categoryBitMask = GameSceneConst.sceneCategory
+//        topBarrier.physicsBody!.contactTestBitMask = Bullet.bulletCategory
         self.createShip()
         self.startAccelerometer()
         
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        println(contact)
+//        println("\(GameSceneConst.sceneCategory), \(Bullet.bulletCategory)")
+        var firstBody, secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if ((firstBody.categoryBitMask & Bullet.bulletCategory) != 0 &&
+            (secondBody.categoryBitMask & GameSceneConst.sceneCategory != 0)) {
+//                firstBody.node?.removeFromParent()
+        }
+//
+//        
+//        if ((firstBody.categoryBitMask & whiteCategory != 0) &&
+//            (secondBody.categoryBitMask & blueCategory != 0)) {
+//                //secondBody.node?.removeFromParent()
+//                println("blue")
+//        }
     }
+    
+    
     
     func startAccelerometer(){
         self.motionManager = CMMotionManager()
@@ -80,7 +115,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func fireBullet(){
         let bullet : Bullet = Bullet(length: 15, thickness: 3, position: self.ship!.nose!)
         self.addChild(bullet.body!)
-        let destination = CGPointMake(self.ship!.body!.position.x, self.ship!.body!.position.y + 1000)
+//        println(self.ship!.nose!)
+        let destination = CGPointMake(self.ship!.nose!.x, 1000)
+//        println(destination)
         let action : SKAction = SKAction.moveTo(destination, duration: Bullet.speed)
         bullet.body?.runAction(action)
 //        bullet.body?.removeFromParent()
