@@ -12,7 +12,6 @@ class Ship {
     let shipCategory : UInt32 = 0x01 << 4
     
     var body : SKShapeNode?
-    var nose : CGPoint?
     var width : CGFloat
     var height : CGFloat
     
@@ -36,31 +35,31 @@ class Ship {
         hull.antialiased = true
         hull.strokeColor = UIColor.blackColor()
         hull.physicsBody = SKPhysicsBody(polygonFromPath: path.CGPath)
-        hull.physicsBody?.dynamic = false
-        hull.physicsBody?.categoryBitMask = self.shipCategory
-        hull.physicsBody?.contactTestBitMask = Box.boxCategory
+        hull.physicsBody!.dynamic = true
+        hull.physicsBody!.affectedByGravity = false
+//        hull.physicsBody!.mass = 0.02
+        hull.physicsBody!.categoryBitMask = self.shipCategory
+        hull.physicsBody!.contactTestBitMask = Box.boxCategory
+        hull.physicsBody!.allowsRotation = false
         return hull
     }
     
     func setPosition(point : CGPoint){
         self.body?.position = point
-        self.updateNose(point)
     }
     
-    func updateNose(point : CGPoint){
-        self.nose = CGPointMake(point.x + self.width/2, point.y + self.height)
+    func getNose() -> CGPoint{
+        return CGPointMake(self.body!.position.x + self.width/2, self.body!.position.y + 10)
     }
     
-    func moveShip(xMovement : Double, boundRight : CGFloat){
+    func moveShip(xMovement : Double, boundLeft : CGFloat, boundRight : CGFloat){
         let offset = xMovement * self.movementSpeed
         let point : CGPoint = CGPointMake(self.body!.position.x + CGFloat(offset), self.body!.position.y)
-//        print("\(point)")
         let x = point.x
-        if(x < 0 || x > boundRight - self.width){
+        if(x < boundLeft || x > boundRight - self.width){
             return;
         }
         self.body!.position = point
-        self.updateNose(point)
     }
     
 }
@@ -84,6 +83,9 @@ struct Bullet {
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = Bullet.bulletCategory
         bullet.physicsBody!.contactTestBitMask = GameSceneConst.sceneCategory
+        bullet.physicsBody!.usesPreciseCollisionDetection = true
+        bullet.physicsBody!.allowsRotation = false
+        bullet.physicsBody!.mass = 0.01
         return bullet
     }
 }

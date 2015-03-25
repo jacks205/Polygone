@@ -9,21 +9,21 @@
 import UIKit
 import SpriteKit
 
-extension SKNode {
-    class func unarchiveFromFile(file : NSString) -> SKNode? {
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
-            
-            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
-            archiver.finishDecoding()
-            return scene
-        } else {
-            return nil
-        }
-    }
-}
+//extension SKNode {
+//    class func unarchiveFromFile(file : NSString) -> SKNode? {
+//        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
+//            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
+//            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+//            
+//            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+//            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
+//            archiver.finishDecoding()
+//            return scene
+//        } else {
+//            return nil
+//        }
+//    }
+//}
 
 class GameViewController: UIViewController {
 
@@ -48,8 +48,9 @@ class GameViewController: UIViewController {
         
         // Configure the view.
         let skView = self.view as SKView
-        println(skView.bounds)
-        var scene : GameScene = GameScene(size: CGSizeMake(skView.bounds.width, skView.bounds.height))
+//        println(skView.bounds)
+        var scene : GameScene = GameScene(size: skView.bounds.size)
+        
         skView.showsFPS = true
         skView.showsNodeCount = true
         
@@ -57,13 +58,13 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = SKSceneScaleMode.AspectFit
         
         skView.presentScene(scene)
     }
 
     override func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
 
     override func supportedInterfaceOrientations() -> Int {

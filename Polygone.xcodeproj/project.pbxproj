@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EA9705F81AC03F2800805E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9705F71AC03F2800805E72 /* AppDelegate.swift */; };
-		EA9705FA1AC03F2800805E72 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA9705F91AC03F2800805E72 /* GameScene.sks */; };
 		EA9705FC1AC03F2800805E72 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9705FB1AC03F2800805E72 /* GameScene.swift */; };
 		EA9705FE1AC03F2800805E72 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9705FD1AC03F2800805E72 /* GameViewController.swift */; };
 		EA9706011AC03F2800805E72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9705FF1AC03F2800805E72 /* Main.storyboard */; };
@@ -32,7 +31,6 @@
 		EA9705F21AC03F2800805E72 /* Polygone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polygone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9705F61AC03F2800805E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA9705F71AC03F2800805E72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EA9705F91AC03F2800805E72 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EA9705FB1AC03F2800805E72 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EA9705FD1AC03F2800805E72 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EA9706001AC03F2800805E72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				EA9705F71AC03F2800805E72 /* AppDelegate.swift */,
-				EA9705F91AC03F2800805E72 /* GameScene.sks */,
 				EA97061B1AC051FA00805E72 /* Ship.swift */,
 				EA9705FB1AC03F2800805E72 /* GameScene.swift */,
 				EA9705FD1AC03F2800805E72 /* GameViewController.swift */,
@@ -203,7 +200,6 @@
 			files = (
 				EA9706061AC03F2800805E72 /* LaunchScreen.xib in Resources */,
 				EA9706031AC03F2800805E72 /* Images.xcassets in Resources */,
-				EA9705FA1AC03F2800805E72 /* GameScene.sks in Resources */,
 				EA9706011AC03F2800805E72 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +413,7 @@
 				EA9706171AC03F2800805E72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA9706181AC03F2800805E72 /* Build configuration list for PBXNativeTarget "PolygoneTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +422,7 @@
 				EA97061A1AC03F2800805E72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
